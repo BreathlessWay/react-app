@@ -278,7 +278,7 @@ export default class Detail extends Component {
 
   render () {
     const accesstoken = this.props.entry.getIn(['userInfo', 'accesstoken']);
-    return <article className='container-flud'>
+    return <article className='container-fluid'>
       {
         <article className='container detail-index  py-3'>
           <DetailHeader info={ this.state.info } handleCollect={ this.handleCollect }/>

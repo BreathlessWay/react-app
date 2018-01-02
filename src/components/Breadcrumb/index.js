@@ -20,7 +20,7 @@ export default class Breadcrumb extends Component {
   render () {
     const breadcrumb = this.props.entry.get('breadcrumb'), len = breadcrumb.size - 1;
     return (
-      <nav aria-label="breadcrumb" className='breadcrumb'>
+      <nav aria-label="breadcrumb" className='breadcrumb container-fluid'>
         <ol className="breadcrumb container py-3">
           {
             breadcrumb.map((item, index) => {

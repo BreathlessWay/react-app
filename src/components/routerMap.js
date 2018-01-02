@@ -12,7 +12,7 @@ const routeMap = (routers) => (
             path={ route.path }
             exact={ route.exact }
             render={ props => (
-              <article className='container-flud'>
+              <article className='container-fluid'>
                 <route.component { ...props }/>
                 <Switch>
                   { routeMap(route.routes) }

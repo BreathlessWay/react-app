@@ -15,6 +15,7 @@ const Footer = asyncComponent(() => import(/* webpackChunkName: "entry" */ '@com
 const Home = asyncComponent(() => import(/* webpackChunkName: "home" */ './Home'));
 const Detail = asyncComponent(() => import(/* webpackChunkName: "detail" */ './Detail'));
 const UserInfoByName = asyncComponent(() => import(/* webpackChunkName: "user" */ './UserInfoByName'));
+const PostTopic = asyncComponent(() => import(/* webpackChunkName: "user" */ './PostTopic'));
 const NotFound = asyncComponent(() => import(/* webpackChunkName: "not-found" */ './NotFound'));
 
 class App extends Component {
@@ -27,12 +28,13 @@ class App extends Component {
     return (
       <ConnectedRouter history={ history }>
         <ScrollTop>
-          <article className='container-flud'>
+          <article className='container-fluid'>
             <Header { ...this.props }/>
             <Breadcrumb entry={ this.props.entry }/>
             <Switch>
               <Route path='/' exact component={ Home }/>
               <Route path='/detail/:id?' component={ Detail }/>
+              <Route path='/topic/:id?' component={ PostTopic }/>
               <Route path='/user/:name' component={ UserInfoByName }/>
               <Route component={ NotFound }/>
             </Switch>

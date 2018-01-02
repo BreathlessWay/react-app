@@ -77,7 +77,7 @@ export default class Header extends Component {
     const accesstoken = this.props.entry.getIn(['userInfo', 'accesstoken']),
       name = this.props.entry.getIn(['userInfo', 'loginname']);
     return (
-      <header className='header header-container container-flud bg-dark'>
+      <header className='header header-container container-fluid bg-dark'>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark container">
           <Link className="navbar-brand" to="/">
             <img src={ logo } alt=""/>
@@ -106,7 +106,7 @@ export default class Header extends Component {
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a className="dropdown-item" href={ `/user/${ name }` }>用户</a>
-                    <NavLink className="dropdown-item" to="/post">发帖</NavLink>
+                    <NavLink className="dropdown-item" to="/topic">发帖</NavLink>
                     <NavLink className="dropdown-item" to="/messages">消息</NavLink>
                     <a className="dropdown-item" href="/logout" onClick={ this.handleLogout }>退出</a>
                   </div>

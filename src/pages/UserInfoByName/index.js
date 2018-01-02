@@ -121,7 +121,7 @@ export default class UserInfoByName extends Component {
 
   render () {
     return (
-      <article className='container-flud'>
+      <article className='container-fluid'>
         <section className='container user-name-index pt-3 pb-4'>
           <header className='d-flex align-items-center user-name-index_header pb-4'>
             <img src={ this.state.userInfo.get('avatar_url') } alt="" className='rounded-circle' width={ 60 }/>
