@@ -1,0 +1,51 @@
+@import "../icon/./iconfont.css";
+@import "./base";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: @background-color;
+  a {
+    text-decoration: none;
+  }
+  ul, ol, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, pre, form, fieldset, legend, button, input, textarea, th, td, article, section, aside, div, header, footer {
+    margin: 0;
+    padding: 0;
+  }
+  button {
+    outline: none;
+  }
+}
+
+.btn.focus, .btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.close:focus, .close:hover {
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  box-sizing: content-box;
+}
+
+.overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

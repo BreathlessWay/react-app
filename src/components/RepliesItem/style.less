@@ -1,0 +1,24 @@
+@import "../../static/style/base";
+
+.replies-index_container {
+  border-bottom: @border-base;
+  .replies-index_avatar {
+    width: 100px;
+    font-size: @base-middle-font-size;
+    border-right: @border-base;
+  }
+
+  .replies-index_content {
+    flex: 1;
+    i {
+      color: @base-light-font-color;
+      font-style: normal;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: @base-small-font-size;
+    }
+    .icon-zan, .icon-huifu {
+      cursor: pointer;
+    }
+  }
+}
