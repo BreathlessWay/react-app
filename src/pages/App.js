@@ -15,7 +15,9 @@ const Footer = asyncComponent(() => import(/* webpackChunkName: "entry" */ '@com
 const Home = asyncComponent(() => import(/* webpackChunkName: "home" */ './Home'));
 const Detail = asyncComponent(() => import(/* webpackChunkName: "detail" */ './Detail'));
 const UserInfoByName = asyncComponent(() => import(/* webpackChunkName: "user" */ './UserInfoByName'));
-const PostTopic = asyncComponent(() => import(/* webpackChunkName: "user" */ './PostTopic'));
+const PostTopic = asyncComponent(() => import(/* webpackChunkName: "topic" */ './PostTopic'));
+const Api = asyncComponent(() => import(/* webpackChunkName: "other" */ './Api'));
+const Intro = asyncComponent(() => import(/* webpackChunkName: "other" */ './Intro'));
 const NotFound = asyncComponent(() => import(/* webpackChunkName: "not-found" */ './NotFound'));
 
 class App extends Component {
@@ -36,6 +38,8 @@ class App extends Component {
               <Route path='/detail/:id?' component={ Detail }/>
               <Route path='/topic/:id?' component={ PostTopic }/>
               <Route path='/user/:name' component={ UserInfoByName }/>
+              <Route path='/api' component={ Api }/>
+              <Route path='/intro' component={ Intro }/>
               <Route component={ NotFound }/>
             </Switch>
             <Footer/>

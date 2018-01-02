@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import './style.less';
 import Modal from '../Modal';
-import { is } from 'immutable';
 import asyncComponent from '@components/asyncComponent';
 
 const LoginForm = asyncComponent(() => import(/* webpackChunkName: "entry" */ '@components/LoginForm'));
@@ -22,14 +21,6 @@ export default class Header extends Component {
     this.handleRegister = this.handleRegister.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
-    return (!is(this.props.entry.get('userInfo'), nextProps.entry.get('userInfo')) || this.state.show !== nextState.show);
-  }
-
-  componentDidUpdate () {
-    console.log('header is updated');
   }
 
   handleSubmit () {
@@ -89,13 +80,13 @@ export default class Header extends Component {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item px-3">
-                <NavLink to='/' className="nav-link" activeClassName='active' exact>首页 <span className="sr-only">(current)</span></NavLink>
+                <NavLink to='/' className="nav-link" activeClassName='active' exact>首页</NavLink>
               </li>
               <li className="nav-item px-3">
-                <NavLink to='/api' className="nav-link" activeClassName='active'>API</NavLink>
+                <NavLink to='/api' className="nav-link" activeClassName='active' exact>API</NavLink>
               </li>
               <li className="nav-item px-3">
-                <NavLink to='/intro' className="nav-link" activeClassName='active'>介绍</NavLink>
+                <NavLink to='/intro' className="nav-link" activeClassName='active' exact>介绍</NavLink>
               </li>
             </ul>
             <aside>
