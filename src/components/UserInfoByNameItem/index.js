@@ -4,7 +4,8 @@ import { is } from 'immutable';
 
 export default class UserInfoByNameItem extends Component {
   static propTypes = {
-    topicItem: PropTypes.object.isRequired
+    topicItem: PropTypes.object.isRequired,
+    handleClickRow: PropTypes.func.isRequired
   };
 
   shouldComponentUpdate (nextProps) {
@@ -15,14 +16,10 @@ export default class UserInfoByNameItem extends Component {
     console.log('user info by name item is updated');
   }
 
-  handleClickRow (id) {
-    this.props.history.push(`/detail/${id}`);
-  }
-
   render () {
     const item = this.props.topicItem;
     return (
-      <li className="list-group-item cursor-pointer d-flex justify-content-between" onClick={ () => this.handleClickRow(item.get('id')) }>
+      <li className="list-group-item cursor-pointer d-flex justify-content-between" onClick={ () => this.props.handleClickRow(item.get('id')) }>
         <span className='overflow-ellipsis'>
           { item.get('title') }
         </span>

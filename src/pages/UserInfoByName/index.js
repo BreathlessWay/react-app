@@ -134,9 +134,9 @@ export default class UserInfoByName extends Component {
               <p><span className='user-name-index_header_right'>积分：</span><span>{ this.state.userInfo.get('score') }</span></p>
             </div>
           </header>
-          <UserInfoByNameList title='收藏的主题' noTips='暂未收藏过主题' topicList={ this.state.userCollect }/>
-          <UserInfoByNameList title='最近回复的主题' noTips='暂未有过回复信息' topicList={ this.state.userInfo.get('recent_replies') }/>
-          <UserInfoByNameList title='最近发表的主题' noTips='暂未发表过主题' topicList={ this.state.userInfo.get('recent_topics') }/>
+          <UserInfoByNameList title='收藏的主题' noTips='暂未收藏过主题' topicList={ this.state.userCollect } handleClickRow={ this.handleClickRow }/>
+          <UserInfoByNameList title='最近回复的主题' noTips='暂未有过回复信息' topicList={ this.state.userInfo.get('recent_replies') } handleClickRow={ this.handleClickRow }/>
+          <UserInfoByNameList title='最近发表的主题' noTips='暂未发表过主题' topicList={ this.state.userInfo.get('recent_topics') } handleClickRow={ this.handleClickRow }/>
         </section>
         { this.state.message && <Alert type={ this.state.type } message={ this.state.message } handleCloseDialog={ this.handleCloseDialog }/> }
       </article>

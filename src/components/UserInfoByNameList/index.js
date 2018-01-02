@@ -20,10 +20,6 @@ export default class UserInfoByNameList extends Component {
     console.log('user info by name list is updated');
   }
 
-  handleClickRow (id) {
-    this.props.history.push(`/detail/${id}`);
-  }
-
   render () {
     return (
       <section className='user-name-index-topic mb-3'>
@@ -34,7 +30,7 @@ export default class UserInfoByNameList extends Component {
           this.props.topicList.size > 0 ? <ul className="list-group py-3">
             {
               this.props.topicList.map(item => (
-                <UserInfoByNameItem topicItem={ item } key={ item.get('id') }/>
+                <UserInfoByNameItem topicItem={ item } key={ item.get('id') } handleClickRow={ id => this.props.handleClickRow(id) }/>
               ))
             }
           </ul> : <aside className='text-center py-3 text-muted'>{ this.props.noTips }</aside>
