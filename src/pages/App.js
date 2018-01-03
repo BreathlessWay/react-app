@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ConnectedRouter } from 'react-router-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { history } from '@store';
 import asyncComponent from '@components/asyncComponent';
@@ -18,15 +18,21 @@ const UserInfoByName = asyncComponent(() => import(/* webpackChunkName: "user" *
 const PostTopic = asyncComponent(() => import(/* webpackChunkName: "topic" */ './PostTopic'));
 const Api = asyncComponent(() => import(/* webpackChunkName: "other" */ './Api'));
 const Intro = asyncComponent(() => import(/* webpackChunkName: "other" */ './Intro'));
+const Message = asyncComponent(() => import(/* webpackChunkName: "message" */ './Message'));
 const NotFound = asyncComponent(() => import(/* webpackChunkName: "not-found" */ './NotFound'));
 
 class App extends Component {
-  componentWillMount () {
+  componentDidMount () {
     const userInfo = sessionStorage.getItem('userInfo');
-    userInfo && this.props.entryUserCookie(JSON.parse(userInfo));
+    if (userInfo) {
+      const accesstoken = JSON.parse(userInfo).accesstoken;
+      accesstoken && this.props.getMessageCount(accesstoken);
+      this.props.entryUserCookie(JSON.parse(userInfo));
+    }
   }
 
   render () {
+    const accesstoken = this.props.entry.getIn(['userInfo', 'accesstoken']);
     return (
       <ConnectedRouter history={ history }>
         <ScrollTop>
@@ -36,10 +42,21 @@ class App extends Component {
             <Switch>
               <Route path='/' exact component={ Home }/>
               <Route path='/detail/:id?' component={ Detail }/>
-              <Route path='/topic/:id?' component={ PostTopic }/>
+              <Route path='/topic/:id?' render={ (props) => (
+                accesstoken ? (
+                  <PostTopic { ...props }/>
+                ) : (
+                  <Redirect to="/"/>
+                )) }/>
               <Route path='/user/:name' component={ UserInfoByName }/>
               <Route path='/api' component={ Api }/>
               <Route path='/intro' component={ Intro }/>
+              <Route path='/messages' render={ (props) => (
+                accesstoken ? (
+                  <Message { ...props }/>
+                ) : (
+                  <Redirect to="/"/>
+                )) }/>
               <Route component={ NotFound }/>
             </Switch>
             <Footer/>

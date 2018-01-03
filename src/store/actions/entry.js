@@ -37,3 +37,18 @@ export function logout (params) {
     payload: {}
   };
 }
+
+export function getMessageCount (accesstoken) {
+  return {
+    type: 'GET_MESSAGE_COUNT',
+    payload: {
+      request: {
+        url: '/message/count',
+        method: 'get',
+        params: {
+          accesstoken
+        }
+      }
+    }
+  };
+}

@@ -10,5 +10,6 @@ export default {
       path: '/',
       name: '首页'
     }
-  ]
+  ],
+  messageCount: 0
 };

@@ -66,7 +66,8 @@ export default class Header extends Component {
 
   render () {
     const accesstoken = this.props.entry.getIn(['userInfo', 'accesstoken']),
-      name = this.props.entry.getIn(['userInfo', 'loginname']);
+      name = this.props.entry.getIn(['userInfo', 'loginname']),
+      messageCount = this.props.entry.get('messageCount');
     return (
       <header className='header header-container container-fluid bg-dark'>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark container">
@@ -92,13 +93,18 @@ export default class Header extends Component {
             <aside>
               {
                 accesstoken ? <div className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle pr-0" href='/' id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    { name }
+                  <a className="nav-link dropdown-toggle pr-0 home-index_name" href='/' id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    { name }{ messageCount > 0 && <span className="badge badge-pill badge-danger"/> }
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a className="dropdown-item" href={ `/user/${ name }` }>用户</a>
                     <NavLink className="dropdown-item" to="/topic">发帖</NavLink>
-                    <NavLink className="dropdown-item" to="/messages">消息</NavLink>
+                    <NavLink className="dropdown-item home-index_message" to="/messages">
+                      <span>消息</span>
+                      {
+                        messageCount > 0 && <span className="badge badge-pill badge-danger">{ messageCount }</span>
+                      }
+                    </NavLink>
                     <a className="dropdown-item" href="/logout" onClick={ this.handleLogout }>退出</a>
                   </div>
                 </div> : <div className="nav-item dropdown">

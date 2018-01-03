@@ -34,6 +34,12 @@ export default function (state, action) {
       } else {
         return state;
       }
+    case 'GET_MESSAGE_COUNT_SUCCESS':
+      return state.set('messageCount', action.payload.data.data);
+    case 'GET_MESSAGE_COUNT_FAIL':
+      return state;
+    case 'GET_MESSAGE_COUNT_COMPLETE':
+      return state;
     default:
       return state;
   }
