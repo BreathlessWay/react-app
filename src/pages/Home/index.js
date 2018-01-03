@@ -51,28 +51,24 @@ export default class Home extends Component {
     ];
     switch (this.props.list.getIn(['params', 'tab'])) {
       case 'ask':
-        document.title = '问答';
         baseBreadcrumb.push({
           path: '/',
           name: '问答'
         });
         break;
       case 'job':
-        document.title = '工作';
         baseBreadcrumb.push({
           path: '/',
           name: '工作'
         });
         break;
       case 'share':
-        document.title = '分享';
         baseBreadcrumb.push({
           path: '/',
           name: '分享'
         });
         break;
       case 'good':
-        document.title = '精华';
         baseBreadcrumb.push({
           path: '/',
           name: '精华'

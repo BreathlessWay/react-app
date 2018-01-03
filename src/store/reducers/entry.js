@@ -27,7 +27,10 @@ export default function (state, action) {
       return state.set('userInfo', logoutInfo);
     case 'UPDATE_BREADCRUMB':
       if (action.payload.params.length > 0) {
-        return state.set('breadcrumb', List(action.payload.params));
+        const breadcrumbLength = action.payload.params.length,
+          breadcrumbList = action.payload.params;
+        document.title = breadcrumbList[breadcrumbLength - 1]['name'];
+        return state.set('breadcrumb', List(breadcrumbList));
       } else {
         return state;
       }

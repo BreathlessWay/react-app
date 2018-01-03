@@ -50,6 +50,7 @@ export default class Detail extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleEditTopic = this.handleEditTopic.bind(this);
   }
 
   componentDidMount () {
@@ -276,12 +277,16 @@ export default class Detail extends Component {
     });
   }
 
+  handleEditTopic (id) {
+    this.props.history.push(`/topic/${id}`);
+  }
+
   render () {
     const accesstoken = this.props.entry.getIn(['userInfo', 'accesstoken']);
     return <article className='container-fluid'>
       {
         <article className='container detail-index  py-3'>
-          <DetailHeader info={ this.state.info } handleCollect={ this.handleCollect }/>
+          <DetailHeader info={ this.state.info } handleCollect={ this.handleCollect } handleEditTopic={ this.handleEditTopic }/>
           <DetailContent content={ this.state.info.get('content') }/>
           <DetailReplies replies={ this.state.info.get('replies') } handleUp={ this.handleUp } handleReply={ this.handleReply }/>
           <footer className='text-right mb-3'>

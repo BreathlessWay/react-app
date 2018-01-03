@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 
 export default class DetailHeader extends Component {
   static propTypes = {
-    info: PropTypes.object,
-    handleCollect: PropTypes.func
+    info: PropTypes.object.isRequired,
+    handleCollect: PropTypes.func.isRequired,
+    handleEditTopic: PropTypes.func.isRequired
   };
 
   shouldComponentUpdate (nextProps) {
@@ -18,7 +19,9 @@ export default class DetailHeader extends Component {
   }
 
   render () {
-    const {info, handleCollect} = this.props;
+    const {info, handleCollect, handleEditTopic} = this.props,
+      id = this.props.entry.getIn(['userInfo', 'id']),
+      author_id = info.get('author_id');
     return (
       <header>
         <h3>
@@ -44,7 +47,13 @@ export default class DetailHeader extends Component {
               <i className="iconfont icon-shijian pl-4 pr-1"/><i>{ new Date(info.get('create_at')).Format('yyyy-MM-dd HH:mm') }</i>
             </p>
           </div>
-          <button type="button" className="btn btn-primary" onClick={ handleCollect }>{ info.get('is_collect') ? '已收藏' : '收藏' }</button>
+          <div>
+            {
+              id === author_id && <button type="button" className="btn btn-primary" onClick={ () => handleEditTopic(info.get('id')) }>编辑</button>
+            }
+            &nbsp;&nbsp;&nbsp;
+            <button type="button" className="btn btn-primary" onClick={ handleCollect }>{ info.get('is_collect') ? '已收藏' : '收藏' }</button>
+          </div>
         </section>
       </header>
     );
