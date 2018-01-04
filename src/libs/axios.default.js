@@ -1,5 +1,6 @@
 import axios from 'axios';
-import config from './config';
+
+const config = require('./config');
 
 const baseConfig = {
   // `method` 是创建请求时使用的方法

@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   baseURL: ' https://cnodejs.org/api/v1',
-  publicPath: './'
+  publicPath: 'https://breathlessway.github.io/'
 };

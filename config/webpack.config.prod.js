@@ -92,6 +92,7 @@ module.exports = {
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
       '@pages': path.resolve(__dirname, '../src/pages'),
+      '@libs': path.resolve(__dirname, '../src/libs'),
       '@static': path.resolve(__dirname, '../src/static'),
       '@store': path.resolve(__dirname, '../src/store'),
       '@components': path.resolve(__dirname, '../src/components'),
@@ -170,7 +171,7 @@ module.exports = {
           // use the "style" loader inside the async code so CSS from them won't be
           // in the main CSS file.
           {
-            test: /\.css$/,
+            test: /\.css|less$/,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -229,7 +230,7 @@ module.exports = {
             // it's runtime that would otherwise processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.js$/, /\.html$/, /\.json$/],
+            exclude: [/\.js$/, /\.html$/, /\.json$/, /\.less$/],
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
             },
