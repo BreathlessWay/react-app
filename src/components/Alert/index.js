@@ -20,7 +20,7 @@ export default class Alert extends Component {
     this.setState({
       time: setTimeout(() => {
         this.props.handleCloseDialog();
-      }, 300000)
+      }, 3000)
     });
   }
 

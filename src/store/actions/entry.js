@@ -22,33 +22,9 @@ export function entryUserCookie (params) {
   };
 }
 
-export function setBreadcrumb (list) {
-  return {
-    type: 'UPDATE_BREADCRUMB',
-    payload: {
-      params: list
-    }
-  };
-}
-
 export function logout (params) {
   return {
     type: 'LOGOUT_USER',
     payload: {}
-  };
-}
-
-export function getMessageCount (accesstoken) {
-  return {
-    type: 'GET_MESSAGE_COUNT',
-    payload: {
-      request: {
-        url: '/message/count',
-        method: 'get',
-        params: {
-          accesstoken
-        }
-      }
-    }
   };
 }

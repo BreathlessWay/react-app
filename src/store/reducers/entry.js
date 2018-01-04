@@ -1,4 +1,4 @@
-import { List, Map } from 'immutable';
+import { Map } from 'immutable';
 
 export default function (state, action) {
   switch (action.type) {
@@ -25,21 +25,6 @@ export default function (state, action) {
         avatar_url: ''
       });
       return state.set('userInfo', logoutInfo);
-    case 'UPDATE_BREADCRUMB':
-      if (action.payload.params.length > 0) {
-        const breadcrumbLength = action.payload.params.length,
-          breadcrumbList = action.payload.params;
-        document.title = breadcrumbList[breadcrumbLength - 1]['name'];
-        return state.set('breadcrumb', List(breadcrumbList));
-      } else {
-        return state;
-      }
-    case 'GET_MESSAGE_COUNT_SUCCESS':
-      return state.set('messageCount', action.payload.data.data);
-    case 'GET_MESSAGE_COUNT_FAIL':
-      return state;
-    case 'GET_MESSAGE_COUNT_COMPLETE':
-      return state;
     default:
       return state;
   }

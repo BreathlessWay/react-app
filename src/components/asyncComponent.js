@@ -31,6 +31,7 @@ export default function asyncComponent (importComponent) {
     return {
       list: state.getIn(['home', 'list']),
       entry: state.get('entry'),
+      app: state.get('app'),
       router: state.get('router')
     };
   }

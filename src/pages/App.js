@@ -4,8 +4,11 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { history } from '@store';
 import asyncComponent from '@components/asyncComponent';
+import BackToTop from '@components/BackToTop';
+import Alert from '@components/Alert';
 import { bindActionCreators } from 'redux';
 import actions from '../store/actions';
+import $ from '$';
 
 const Header = asyncComponent(() => import(/* webpackChunkName: "entry" */ '@components/Header'));
 const ScrollTop = asyncComponent(() => import(/* webpackChunkName: "entry" */ '@components/ScrollTop'));
@@ -22,6 +25,14 @@ const Message = asyncComponent(() => import(/* webpackChunkName: "message" */ '.
 const NotFound = asyncComponent(() => import(/* webpackChunkName: "not-found" */ './NotFound'));
 
 class App extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      show: false
+    };
+    this.handleCloseDialog = this.handleCloseDialog.bind(this);
+  }
+
   componentDidMount () {
     const userInfo = sessionStorage.getItem('userInfo');
     if (userInfo) {
@@ -29,6 +40,16 @@ class App extends Component {
       accesstoken && this.props.getMessageCount(accesstoken);
       this.props.entryUserCookie(JSON.parse(userInfo));
     }
+    $(window).on('scroll', () => {
+      const _top = $(document).scrollTop();
+      this.setState({
+        show: _top > 0
+      });
+    });
+  }
+
+  handleCloseDialog () {
+    this.props.handleDialog({type: '', message: ''});
   }
 
   render () {
@@ -60,6 +81,10 @@ class App extends Component {
               <Route component={ NotFound }/>
             </Switch>
             <Footer/>
+            <BackToTop show={ this.state.show }/>
+            {
+              this.props.app.getIn(['dialog', 'message']) && <Alert type={ this.props.app.getIn(['dialog', 'type']) } message={ this.props.app.getIn(['dialog', 'message']) } handleCloseDialog={ this.handleCloseDialog }/>
+            }
           </article>
         </ScrollTop>
       </ConnectedRouter>
@@ -70,7 +95,8 @@ class App extends Component {
 function mapStateToProps (state) {
   return {
     router: state.get('router'),
-    entry: state.get('entry')
+    entry: state.get('entry'),
+    app: state.get('app')
   };
 }
 

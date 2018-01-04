@@ -10,7 +10,7 @@ export default class Breadcrumb extends Component {
   };
 
   shouldComponentUpdate (nextProps) {
-    return !is(this.props.entry, nextProps.entry);
+    return !is(this.props.app, nextProps.app);
   }
 
   componentDidUpdate () {
@@ -18,7 +18,7 @@ export default class Breadcrumb extends Component {
   }
 
   render () {
-    const breadcrumb = this.props.entry.get('breadcrumb'), len = breadcrumb.size - 1;
+    const breadcrumb = this.props.app.get('breadcrumb'), len = breadcrumb.size - 1;
     return (
       <nav aria-label="breadcrumb" className='breadcrumb container-fluid'>
         <ol className="breadcrumb container py-3">

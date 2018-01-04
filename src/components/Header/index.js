@@ -67,7 +67,7 @@ export default class Header extends Component {
   render () {
     const accesstoken = this.props.entry.getIn(['userInfo', 'accesstoken']),
       name = this.props.entry.getIn(['userInfo', 'loginname']),
-      messageCount = this.props.entry.get('messageCount');
+      messageCount = this.props.app.get('messageCount');
     return (
       <header className='header header-container container-fluid bg-dark'>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark container">

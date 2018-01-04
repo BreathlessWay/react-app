@@ -5,7 +5,8 @@ export default class LoginForm extends Component {
     super(props);
     this.state = {
       value: '',
-      errorMessage: ''
+      errorMessage: '',
+      time: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -32,16 +33,25 @@ export default class LoginForm extends Component {
       .then(res => {
         const userInfo = JSON.stringify({...res.payload.data, ...{accesstoken: this.state.value}});
         sessionStorage.setItem('userInfo', userInfo);
-        res.payload.data.success && this.props.handleCloseModal();
-        window.history.go();
+        if (res.payload.data.success) {
+          this.props.handleCloseModal();
+          setTimeout(() => {
+            window.history.go();
+          }, 1000);
+          this.props.handleDialog({type: 'success', message: '登录成功'});
+        }
       })
       .catch(err => {
           this.setState({
-            errorMessage: err.error.response && err.error.response.data.error_msg
+            errorMessage: err.error.response.data ? err.error.response.data.error_msg : '登录失败'
           });
         }
       );
     }
+  }
+
+  componentWillUnmount () {
+    window.clearTimeout(this.state.time);
   }
 
   render () {

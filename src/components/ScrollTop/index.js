@@ -9,7 +9,6 @@ class ScrollToTop extends Component {
       setTimeout(() => {
         window.scrollTo(0, 0);
       }, 1000);
-
     }
   }
 

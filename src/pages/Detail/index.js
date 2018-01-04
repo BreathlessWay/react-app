@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { fromJS, Map } from 'immutable';
 import './style.less';
-import Alert from '@components/Alert';
 import Modal from '@components/Modal';
 import asyncComponent from '@components/asyncComponent';
 
@@ -31,8 +30,6 @@ export default class Detail extends Component {
         create_at: Date.now(),
         author_id: ''
       }),
-      message: '',
-      type: '',
       replay: Map({
         reply_id: '',
         name: '',
@@ -43,7 +40,6 @@ export default class Detail extends Component {
       })
     };
     this.handleCollect = this.handleCollect.bind(this);
-    this.handleCloseDialog = this.handleCloseDialog.bind(this);
     this.handleUp = this.handleUp.bind(this);
     this.handleReply = this.handleReply.bind(this);
     this.getDetail = this.getDetail.bind(this);
@@ -78,10 +74,8 @@ export default class Detail extends Component {
       });
     })
     .catch(err => {
-      this.setState({
-        type: 'danger',
-        message: err.response ? err.response.data.error_msg : '请求异常'
-      });
+      const errData = err.response.data;
+      this.props.handleDialog({type: 'danger', message: errData ? errData.error_msg : '请求异常'});
     });
   }
 
@@ -89,10 +83,7 @@ export default class Detail extends Component {
     const accesstoken = this.props.entry.getIn(['userInfo', 'accesstoken']),
       topic_id = this.state.info.get('id');
     if (!accesstoken) {
-      this.setState({
-        type: 'warning',
-        message: '请先登录'
-      });
+      this.props.handleDialog({type: 'warning', message: '请先登录'});
       return;
     }
     const is_collect = this.state.info.get('is_collect');
@@ -100,63 +91,46 @@ export default class Detail extends Component {
     .then(() => {
       this.setState(preState => {
         return {
-          type: 'success',
-          message: '取消收藏成功',
           info: preState.info.set('is_collect', false)
         };
       });
+      this.props.handleDialog({type: 'success', message: '取消收藏成功'});
     })
     .catch(err => {
-      this.setState({
-        type: 'danger',
-        message: err.response ? err.response.data.error_msg : '取消收藏失败'
-      });
+      const errData = err.response.data;
+      this.props.handleDialog({type: 'danger', message: errData ? errData.error_msg : '取消收藏失败'});
     }) : axios.post('/topic_collect/collect', {accesstoken, topic_id})
     .then(() => {
       this.setState(preState => {
         return {
-          type: 'success',
-          message: '收藏成功',
           info: preState.info.set('is_collect', true)
         };
       });
+      this.props.handleDialog({type: 'success', message: '收藏成功'});
     })
     .catch(err => {
-      this.setState({
-        type: 'danger',
-        message: err.response ? err.response.data.error_msg : '收藏失败'
-      });
+      const errData = err.response.data;
+      this.props.handleDialog({type: 'danger', message: errData ? errData.error_msg : '收藏失败'});
     });
   }
 
   handleUp (id) {
     const accesstoken = this.props.entry.getIn(['userInfo', 'accesstoken']);
     if (!accesstoken) {
-      this.setState({
-        type: 'warning',
-        message: '请先登录'
-      });
+      this.props.handleDialog({type: 'warning', message: '请先登录'});
       return;
     }
     axios.post(`/reply/${id}/ups`, {accesstoken})
     .then(res => {
       if (res.data.success) {
-        res.data.action === 'up' && this.setState({
-          type: 'success',
-          message: '点赞成功'
-        });
-        res.data.action === 'down' && this.setState({
-          type: 'success',
-          message: '取消点赞成功'
-        });
+        res.data.action === 'up' && this.props.handleDialog({type: 'success', message: '点赞成功'});
+        res.data.action === 'down' && this.props.handleDialog({type: 'success', message: '取消点赞成功'});
       }
       this.getDetail(accesstoken);
     })
     .catch(err => {
-      this.setState({
-        type: 'danger',
-        message: err.response ? err.response.data.error_msg : '点赞失败'
-      });
+      const errData = err.response.data;
+      this.props.handleDialog({type: 'danger', message: errData ? errData.error_msg : '点赞失败'});
     });
   }
 
@@ -242,25 +216,15 @@ export default class Detail extends Component {
           content: ''
         });
         this.setState({
-          type: 'success',
-          message: '回复成功',
           replay: replayInitial
         });
+        this.props.handleDialog({type: 'success', message: '回复成功'});
         this.getDetail(accesstoken);
       }
     })
     .catch(err => {
-      this.setState({
-        type: 'danger',
-        message: err.response ? err.response.data.error_msg : '回复失败'
-      });
-    });
-  }
-
-  handleCloseDialog () {
-    this.setState({
-      type: null,
-      message: null
+      const errData = err.response.data;
+      this.props.handleDialog({type: 'danger', message: errData ? errData.error_msg : '回复失败'});
     });
   }
 
@@ -293,9 +257,6 @@ export default class Detail extends Component {
             <button type="button" className="btn btn-primary" onClick={ () => this.handleReply({name: '', reply_id: ''}) }>发表回复</button>
           </footer>
         </article>
-      }
-      {
-        this.state.message && <Alert type={ this.state.type } message={ this.state.message } handleCloseDialog={ this.handleCloseDialog }/>
       }
       {
         accesstoken && <Modal title={ this.state.replay.get('title') } show={ this.state.replay.get('show') } handleSubmit={ this.handleSubmit } handleCloseModal={ this.handleCloseModal }>

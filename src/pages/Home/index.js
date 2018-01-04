@@ -27,6 +27,10 @@ export default class Home extends Component {
     this.props.getList(params.toJS())
     .then(() => {
       this.handleSet();
+    })
+    .catch(err => {
+      const errData = err.error.response.data;
+      this.props.handleDialog({type: 'danger', message: errData ? errData.error_msg : '获取主题列表失败'});
     });
   }
 

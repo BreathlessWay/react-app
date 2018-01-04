@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { fromJS } from 'immutable';
-import Alert from '@components/Alert';
 import asyncComponent from '@components/asyncComponent';
 import './style.less';
 
@@ -16,53 +15,12 @@ export default class UserInfoByName extends Component {
         create_at: '',
         githubUsername: '',
         loginname: '',
-        recent_replies: [
-          {
-            author: {
-              avatar_url: '',
-              loginname: ''
-            },
-            id: '',
-            last_reply_at: '',
-            title: ''
-          }
-        ],
-        recent_topics: [
-          {
-            author: {
-              avatar_url: '',
-              loginname: ''
-            },
-            id: '',
-            last_reply_at: '',
-            title: ''
-          }
-        ],
+        recent_replies: [],
+        recent_topics: [],
         score: 0
       }),
-      userCollect: fromJS([
-        {
-          author: {
-            avatar_url: '',
-            loginname: ''
-          },
-          author_id: '',
-          content: '',
-          create_at: '',
-          good: false,
-          id: '',
-          last_reply_at: '',
-          reply_count: 0,
-          tab: '',
-          title: '',
-          top: false,
-          visit_count: 0
-        }
-      ]),
-      type: '',
-      message: ''
+      userCollect: fromJS([])
     };
-    this.handleCloseDialog = this.handleCloseDialog.bind(this);
     this.handleClickRow = this.handleClickRow.bind(this);
   }
 
@@ -87,10 +45,8 @@ export default class UserInfoByName extends Component {
       });
     })
     .catch(err => {
-      this.setState({
-        type: 'danger',
-        message: err.response ? err.response.data.error_msg : '请求用户信息失败'
-      });
+      const errData = err.response.data;
+      this.props.handleDialog({type: 'danger', message: errData ? errData.error_msg : '请求用户信息失败'});
     });
 
     // 用户收藏主题
@@ -101,22 +57,13 @@ export default class UserInfoByName extends Component {
       });
     })
     .catch(err => {
-      this.setState({
-        type: 'danger',
-        message: err.response ? err.response.data.error_msg : '获取用户收藏主题失败'
-      });
+      const errData = err.response.data;
+      this.props.handleDialog({type: 'danger', message: errData ? errData.error_msg : '获取用户收藏主题失败'});
     });
   }
 
   handleClickRow (id) {
     this.props.history.push(`/detail/${id}`);
-  }
-
-  handleCloseDialog () {
-    this.setState({
-      type: null,
-      message: null
-    });
   }
 
   render () {
@@ -138,7 +85,6 @@ export default class UserInfoByName extends Component {
           <UserInfoByNameList title='最近回复的主题' noTips='暂未有过回复信息' topicList={ this.state.userInfo.get('recent_replies') } handleClickRow={ this.handleClickRow }/>
           <UserInfoByNameList title='最近发表的主题' noTips='暂未发表过主题' topicList={ this.state.userInfo.get('recent_topics') } handleClickRow={ this.handleClickRow }/>
         </section>
-        { this.state.message && <Alert type={ this.state.type } message={ this.state.message } handleCloseDialog={ this.handleCloseDialog }/> }
       </article>
     );
   }

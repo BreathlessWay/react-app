@@ -9,10 +9,12 @@ import reducers from './reducers'; // Or wherever you keep your reducers
 import { fromJS } from 'immutable';
 import initialHome from './state/home';
 import initialEntry from './state/entry';
+import initialApp from './state/app';
 
 const initialState = fromJS({
   home: initialHome,
   entry: initialEntry,
+  app: initialApp,
   router: {}
 });
 // Create a history of your choosing (we're using a browser history in this case)

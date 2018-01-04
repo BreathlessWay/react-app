@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { fromJS, Map } from 'immutable';
 import axios from 'axios';
-import Alert from '@components/Alert';
 import './style.less';
 
 export default class PostTopic extends Component {
@@ -17,8 +16,6 @@ export default class PostTopic extends Component {
         title: '',
         content: ''
       }),
-      type: '',
-      message: '',
       time: null
     };
     this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -63,10 +60,8 @@ export default class PostTopic extends Component {
       });
     })
     .catch(err => {
-      this.setState({
-        type: 'danger',
-        message: err.response ? err.response.data.error_msg : '请求异常'
-      });
+      const errData = err.response.data;
+      this.props.handleDialog({type: 'danger', message: errData ? errData.error_msg : '请求异常'});
     });
   }
 
@@ -173,19 +168,16 @@ export default class PostTopic extends Component {
     .then(res => {
       if (res.data.success) {
         this.setState({
-          type: 'success',
-          message: '编辑成功',
           time: setTimeout(() => {
             this.props.history.replace('/');
           }, 1000)
         });
+        this.props.handleDialog({type: 'success', message: '编辑成功'});
       }
     })
     .catch(err => {
-      this.setState({
-        type: 'danger',
-        message: err.response ? err.response.data.error_msg : '编辑失败'
-      });
+      const errData = err.response.data;
+      this.props.handleDialog({type: 'danger', message: errData ? errData.error_msg : '编辑失败'});
     });
   }
 
@@ -194,26 +186,16 @@ export default class PostTopic extends Component {
     .then(res => {
       if (res.data.success) {
         this.setState({
-          type: 'success',
-          message: '发帖成功',
           time: setTimeout(() => {
             this.props.history.replace('/');
           }, 1000)
         });
+        this.props.handleDialog({type: 'success', message: '发帖成功'});
       }
     })
     .catch(err => {
-      this.setState({
-        type: 'danger',
-        message: err.response ? err.response.data.error_msg : '发帖失败'
-      });
-    });
-  }
-
-  handleCloseDialog () {
-    this.setState({
-      type: null,
-      message: null
+      const errData = err.response.data;
+      this.props.handleDialog({type: 'danger', message: errData ? errData.error_msg : '发帖失败'});
     });
   }
 
@@ -259,9 +241,6 @@ export default class PostTopic extends Component {
             <button type="button" className="btn btn-primary" onClick={ this.handleTopicSubmit }>提交</button>
           </footer>
         </section>
-        {
-          this.state.message && <Alert type={ this.state.type } message={ this.state.message } handleCloseDialog={ this.handleCloseDialog }/>
-        }
       </article>
     );
   }
