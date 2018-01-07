@@ -36,7 +36,7 @@ export default class LoginForm extends Component {
         if (res.payload.data.success) {
           this.props.handleCloseModal();
           setTimeout(() => {
-            window.history.go();
+            window.location.href = '/';
           }, 1000);
           this.props.handleDialog({type: 'success', message: '登录成功'});
         }
