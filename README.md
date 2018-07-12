@@ -16,5 +16,3 @@
 1. react-addons-css-transition-group配合switch的路由过场动画
 2. react-router的全局404页面
 3. 登录后查询文章收藏状态，目前通过window.history.go()刷新页面解决，考虑到文章放在redux里面太大了
-
-jenkins 测试
