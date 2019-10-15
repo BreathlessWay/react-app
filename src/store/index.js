@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 
-import createHistory from 'history/createBrowserHistory';
+import createHistory from 'history/createHashHistory';
 
 import { routerMiddleware } from 'react-router-redux';
 import axios from 'axios';
