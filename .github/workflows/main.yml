@@ -17,9 +17,4 @@ jobs:
       run: echo Hello, world!
       
     - name: Build and Deploy
-      uses: JamesIves/github-pages-deploy-action@master
-      env:
-        ACCESS_TOKEN: ${{ secrets.action }}
-        BRANCH: gh-pages
-        FOLDER: build
-        BUILD_SCRIPT: npm install && npm run build && gh-pages -d build
+      run: npm install && npm run build && gh-pages -d build
