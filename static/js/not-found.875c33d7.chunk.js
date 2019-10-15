@@ -1,0 +1,2 @@
+webpackJsonp([7],{225:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var a=t(0),l=t.n(a),c=function(e){var n=e.location;return l.a.createElement("div",null,l.a.createElement("h3",null,"404 not found"),l.a.createElement("h3",null,"No match for ",l.a.createElement("code",null,n.pathname)))};n.default=c}});
+//# sourceMappingURL=not-found.875c33d7.chunk.js.map
