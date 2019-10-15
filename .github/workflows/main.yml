@@ -1,0 +1,19 @@
+name: GitHub Actions Try Step
+
+on: 
+  push:
+    branches: 
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@master
+    
+    - name: Echo Something
+      run: echo Hello, world!
+    - name: Start Build
+      run: npm install && npm run build
