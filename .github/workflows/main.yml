@@ -1,0 +1,25 @@
+name: GitHub Actions Try Step
+
+on: 
+  push:
+    branches: 
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@master
+    
+    - name: Echo Something
+      run: echo Hello, world!
+      
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.action }}
+        BRANCH: gh-pages
+        FOLDER: build
+        BUILD_SCRIPT: npm install && npm run build
