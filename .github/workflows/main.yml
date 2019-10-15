@@ -17,4 +17,4 @@ jobs:
       run: echo Hello, world!
       
     - name: Build and Deploy
-      run: npm install && npm run build && gh-pages -d build
+      run: npm install && npm run build && npm run deploy
