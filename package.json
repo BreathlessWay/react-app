@@ -2,7 +2,7 @@
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://breathlessway.github.io",
+  "homepage": "https://breathlessway.github.io/react-app",
   "dependencies": {
     "autoprefixer": "7.1.6",
     "axios": "^0.17.1",
