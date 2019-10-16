@@ -1,4 +1,4 @@
-# react相关
+## React相关
 
 1. 基于()=>import的react-router4的代码分割，参考插件[react-loadable](https://github.com/thejameskyle/react-loadable)
 2. create-react-app的配置更改，npm run eject暴漏webpack配置后自定义修改
@@ -11,7 +11,7 @@
 9. 通过为[redux-axios-middleware](https://github.com/svrcekmichal/redux-axios-middleware#middleware-options)的config设置，可以catch异常，并添加_complete状态
 
 
-## problem
+## Problem
 
 1. react-addons-css-transition-group配合switch的路由过场动画
 2. react-router的全局404页面
@@ -20,4 +20,5 @@
 ## Actions
 1. 参考https://github.com/peaceiris/actions-gh-pages实现了基于Github Actions的持续集成，提交master分支会自动构建发布gh-pages
 
+## 预览
 [项目预览](https://breathlessway.github.io/react-app)
