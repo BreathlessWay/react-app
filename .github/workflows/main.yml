@@ -11,8 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@master
-    
+    - name: Checkout
+      uses: actions/checkout@master
+
     - name: Echo Step
       run: echo Start build
       
