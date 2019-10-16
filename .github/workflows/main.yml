@@ -3,7 +3,7 @@ name: GitHub Actions Try Step
 on: 
   push:
     tags:
-      - v1.*
+      - v*
 
 jobs:
   build:
@@ -13,11 +13,14 @@ jobs:
     steps:
     - uses: actions/checkout@master
     
-    - name: Echo Something
-      run: echo Hello, world!
+    - name: Echo Step
+      run: echo Start build
       
     - name: Build
       run: npm install && npm run build
+
+    - name: Echo Step
+      run: echo build end and start deploy
       
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v2.5.0
@@ -25,3 +28,6 @@ jobs:
         ACTIONS_DEPLOY_KEY: ${{ secrets.Deploy_Action }}
         PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: ./build
+
+    - name: Finish
+      run: echo deploy finish
