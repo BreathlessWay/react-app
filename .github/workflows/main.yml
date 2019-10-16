@@ -2,8 +2,6 @@ name: GitHub Actions Try Step
 
 on: 
   push:
-    branches: 
-      - master
     tags:
       - deploy
 
