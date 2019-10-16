@@ -5,7 +5,7 @@ on:
     branches: 
       - master
     tags:
-      - deploy
+      - v*.*
 
 jobs:
   build:
