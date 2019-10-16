@@ -3,7 +3,7 @@ name: GitHub Actions Try Step
 on: 
   push:
     tags:
-      - deploy
+      - v*.*
 
 jobs:
   build:
