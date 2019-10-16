@@ -21,4 +21,4 @@
 1. 参考https://github.com/peaceiris/actions-gh-pages实现了基于Github Actions的持续集成，提交master分支会自动构建发布gh-pages
 
 ## 预览
-[预览地址](https://breathlessway.github.io/react-app)
+[点击预览](https://breathlessway.github.io/react-app)
